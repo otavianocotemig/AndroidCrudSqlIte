@@ -1,13 +1,16 @@
 package com.cotemig.appecommerce;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements  View.OnClickListener{
 
@@ -40,6 +43,18 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         inflater.inflate(R.menu.menuprincipal,menu);
        return super.onCreateOptionsMenu(menu);
     }
+
+    // metodo do APP que executa o que foi selecionado no menu de opções
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.menu_cadastroProduto){
+            Intent acessoTelaCadProdutos = new Intent(this,cadastro_produtos.class);
+            startActivity(acessoTelaCadProdutos);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
     private static class ViewHolder{
         private ImageView iv_product_detail;

@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".product_detailsActivity"></activity>
+        <activity android:name=".formulario_produtos"></activity>
+        <activity android:name=".cadastro_produtos" />
+        <activity android:name=".product_detailsActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
