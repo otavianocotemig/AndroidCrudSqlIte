@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 
 public class ProdutosDao extends SQLiteOpenHelper {
-    private static final String DATABASE = "LOJAVIRTUAL3B";
+    private static final String DATABASE = "LOJAVIRTUAL3B11";
     private static final int VERSION = 1;
 
     // Metodo Construtor da classe

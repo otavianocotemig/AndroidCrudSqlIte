@@ -13,6 +13,7 @@ import com.cotemig.appecommerce.Model.ProdutosDao;
 public class formulario_produtos extends AppCompatActivity implements  View.OnClickListener {
 
     private ViewHolder mviewHolder = new ViewHolder();
+    // Atributos para instanciar as classes de CRUD
     private Produtos produto;
     private ProdutosDao produtodao;
 
@@ -38,10 +39,14 @@ public class formulario_produtos extends AppCompatActivity implements  View.OnCl
 
     @Override
     public void onClick(View v) {
-        // Incluir Registro no banco
-        produto.setNomeProduto(this.mviewHolder.editText_NomeProd.toString());
-        produto.setDescricao(this.mviewHolder.editText_Descricao.toString());
+        // Incluindo dados na tabela de produtos
+        produto.setNomeProduto(this.mviewHolder.editText_NomeProd.getText().toString());
+        produto.setDescricao(this.mviewHolder.editText_Descricao.getText().toString());
+        produto.setPreco(Double.parseDouble(this.mviewHolder.editText_Preco.getText().toString()));
+        produto.setQuantidade(Integer.parseInt(this.mviewHolder.editText_Quantidade.getText().toString()));
+        // Chamar a classe para inserir o produto
         produtodao.salvarProduto(produto);
+        produtodao.close();
 
 
     }

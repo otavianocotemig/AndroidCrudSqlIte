@@ -1,5 +1,7 @@
 package com.cotemig.appecommerce.Model;
 
+import androidx.annotation.NonNull;
+
 public class Produtos {
     private Long id;
     private String nomeProduto;
@@ -47,8 +49,8 @@ public class Produtos {
         Preco = preco;
     }
 
-
-
-
-
+        @Override
+    public String toString() {
+        return nomeProduto.toString() +" - "+Descricao.toString();
+    }
 }
