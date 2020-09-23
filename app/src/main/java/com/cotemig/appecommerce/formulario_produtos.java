@@ -2,7 +2,9 @@ package com.cotemig.appecommerce;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,7 +16,7 @@ public class formulario_produtos extends AppCompatActivity implements  View.OnCl
 
     private ViewHolder mviewHolder = new ViewHolder();
     // Atributos para instanciar as classes de CRUD
-    private Produtos produto;
+    private Produtos produto, EditarProduto;
     private ProdutosDao produtodao;
 
     @Override
@@ -26,6 +28,10 @@ public class formulario_produtos extends AppCompatActivity implements  View.OnCl
         produto = new Produtos();
         produtodao = new ProdutosDao(this);
         //
+        Intent intent = getIntent();
+        EditarProduto = (Produtos) intent.getSerializableExtra("produto-escolhido");
+
+
         // Mapeamento dos objetos da tela
         this.mviewHolder.editText_NomeProd  = findViewById(R.id.editText_NomeProd);
         this.mviewHolder.editText_Descricao  = findViewById(R.id.editText_Descricao);
@@ -34,6 +40,19 @@ public class formulario_produtos extends AppCompatActivity implements  View.OnCl
         this.mviewHolder.btn_Produto  = findViewById(R.id.btn_Produto);
 
         this.mviewHolder.btn_Produto.setOnClickListener(this);
+
+        // Verificar se tem informação no EditarProduto
+        if (EditarProduto != null){
+            this.mviewHolder.btn_Produto.setText("Modificar Produto");
+            this.mviewHolder.editText_NomeProd.setText(EditarProduto.getNomeProduto());
+            this.mviewHolder.editText_Descricao.setText(EditarProduto.getDescricao());
+            this.mviewHolder.editText_Preco.setText(EditarProduto.getPreco()+"");
+            this.mviewHolder.editText_Quantidade.setText(EditarProduto.getQuantidade()+"");
+            produto.setId(EditarProduto.getId());
+        }else{
+            this.mviewHolder.btn_Produto.setText("Cadastrar Produto");
+        }
+
 
     }
 
@@ -45,7 +64,14 @@ public class formulario_produtos extends AppCompatActivity implements  View.OnCl
         produto.setPreco(Double.parseDouble(this.mviewHolder.editText_Preco.getText().toString()));
         produto.setQuantidade(Integer.parseInt(this.mviewHolder.editText_Quantidade.getText().toString()));
         // Chamar a classe para inserir o produto
-        produtodao.salvarProduto(produto);
+        if (this.mviewHolder.btn_Produto.getText().toString().equals("Cadastrar Produto")){
+            produtodao.salvarProduto(produto);
+            Utilidades.Alert(this,"Produto Inserido com Sucesso.");
+        }else{
+            produtodao.alterarProduto(produto);
+            Utilidades.Alert(this,"Produto Alterado com Sucesso.");
+        }
+
         produtodao.close();
 
 

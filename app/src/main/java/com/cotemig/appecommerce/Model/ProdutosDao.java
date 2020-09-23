@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.view.MenuItem;
 
 import java.util.ArrayList;
 
@@ -16,6 +17,7 @@ public class ProdutosDao extends SQLiteOpenHelper {
     public ProdutosDao (Context context){
         super(context,DATABASE,null,VERSION);
     }
+
 
     @Override
     public void onCreate(SQLiteDatabase db) {

@@ -2,7 +2,9 @@ package com.cotemig.appecommerce.Model;
 
 import androidx.annotation.NonNull;
 
-public class Produtos {
+import java.io.Serializable;
+
+public class Produtos implements Serializable {
     private Long id;
     private String nomeProduto;
     private String Descricao;
